@@ -1,0 +1,6 @@
+
+describe('component generation', function() {
+
+
+
+});

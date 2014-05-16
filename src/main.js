@@ -1,0 +1,4 @@
+/**
+ * @ngdocs
+ */
+angular.module('componitor', []);
