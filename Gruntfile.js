@@ -40,7 +40,7 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= concat.dist.dest %>',
         dest: '<%= dist %>/componitor.min.js',
-        sourceMap: true 
+        sourceMap: true
       }
     },
     ngdocs: {
