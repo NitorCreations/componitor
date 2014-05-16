@@ -1,0 +1,21 @@
+{
+  "name": "componitor",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "Simple webcomponent-like structures to create reusable AngularJs html template directives on-the-fly",
+  "main": "dist/componitor.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NitorCreations/componitor"
+  },
+  "keywords": [
+    "AngularJs",
+    "components",
+    "Nitor"
+  ],
+  "author": "Nitor Creations / Reko Jokelainen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NitorCreations/componitor/issues"
+  },
+  "homepage": "https://github.com/NitorCreations/componitor"
+}
