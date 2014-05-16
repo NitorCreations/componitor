@@ -13,8 +13,11 @@ module.exports = function(grunt) {
  
   grunt.initConfig({
     dist: 'dist',
+    sources: 'src/**/*.js',
+    tests: 'test/**/*.js',
+    ngdocFiles: 'src/**/*.ngdoc',
     jshint: {
-      files: ['Gruntfile.js','src/**/*.js'],
+      files: ['Gruntfile.js','<%= sources %>'],
       options: {
         jshintrc: '.jshintrc'
       }
@@ -32,7 +35,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['src/**/*.js'],
+        src: ['<%= sources %>'],
         dest: '<%= dist %>/componitor.js'
       }
     },
@@ -54,8 +57,14 @@ module.exports = function(grunt) {
         html5Mode: false
       },
       api: {
-        files: ['src/**/*.js', 'src/**/*.ngdoc'],
+        src: ['<%= sources %>', '<%= ngdocFiles %>'],
         title: 'API Documentation'
+      }
+    },
+    watch: {
+      ngdocs: {
+        files: ['<%= sources %>', '<%= ngdocFiles %>'],
+        tasks: ['after-test']
       }
     }
   });
@@ -63,6 +72,6 @@ module.exports = function(grunt) {
   grunt.registerTask('before-test', ['jshint']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('after-test', ['build']);
-  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('build', ['concat:dist', 'uglify:dist', 'ngdocs:api']);
   grunt.registerTask('default', ['before-test','test','after-test']);
 };
