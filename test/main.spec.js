@@ -33,6 +33,7 @@ describe('component generation', function() {
       angular.bootstrap(document, ['componitor', 'testCtrlModule']);
     });
     afterEach(function() {
+//      console.log(angular.element('<b>').append(realElement().clone()).html());
       element.remove();
     });
   }
@@ -51,6 +52,10 @@ describe('component generation', function() {
     it('should render the contents for the real element', function() {
       expect(realElement().html()).toEqual('<h1 class="ng-scope ng-binding">The title is great!</h1>');
     });
+
+    it('should add the .componitor-component class', function() {
+      expect(realElement().attr('class')).toContain('componitor-component');
+    });
   });
 
   describe('multiple substitutions, order agnostic', function() {
@@ -65,7 +70,7 @@ describe('component generation', function() {
     });
   });
 
-  ddescribe('multiple templates inside each other', function() {
+  describe('multiple templates inside each other', function() {
     startWithHtml('<div id="componitorTest" ng-controller="TestCtrl">' +
       '<my-box>' +
         '<p>' +

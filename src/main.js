@@ -82,9 +82,6 @@ var componitor = angular.module('componitor', [])
           scope: true,
           restrict: 'E',
           link: function(s,realElem) {
-            if (s._componitorCompiled) {
-              return;
-            }
             realElem.addClass('componitor-component');
 
             var template = angular.element('<p>').append(angular.element(templateHtml).clone());
@@ -100,9 +97,8 @@ var componitor = angular.module('componitor', [])
             });
 
             // Replace with the populated template and $compile
-            realElem.replaceWith(template.html());
+            realElem.html(template.html());
             $compile(realElem.contents())(s);
-            s._componitorCompiled = true;
           }
         };
       }]);
