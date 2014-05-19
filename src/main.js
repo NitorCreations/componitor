@@ -11,26 +11,25 @@
 <example module="componitor">
  <file name="index.html">
 
-  <div ng-controller="DemoCtrl as ctrl">
-  <h1>There should be a box below</h1>
-  Title: <input type="text" ng-model="ctrl.title" />
-  Body: <input type="text" ng-model="ctrl.body" />
+  <div class="clearfix" ng-controller="DemoCtrl as ctrl">
+    <h1>There should be a two boxes below with different contents</h1>
+    Title: <input type="text" ng-model="ctrl.title" />
+    Body: <input type="text" ng-model="ctrl.body" />
+
+
+    <my-box>
+      <my-box-title>{{ctrl.title}}</my-box-title>
+      <my-box-body>{{ctrl.body}}</my-box-body>
+    </my-box>
+
+    <my-box>
+      <my-box-title>My title is: {{ctrl.title}}</my-box-title>
+      <my-box-body>And the body: {{ctrl.body}}</my-box-body>
+      <!-- This will be ignored -->
+      <my-box-body>This should never be shown</my-box-body>
+    </my-box>
+
   </div>
-
-  <my-box>
-    <my-box-title>{{ctrl.title}}</my-box-title>
-    <my-box-content>{{ctrl.body}}</my-box-content>
-  </my-box>
-
-  <h2>And another box with extended contents</h2>
-  <my-box>
-    <my-box-title>My title is: {{ctrl.title}}</my-box-title>
-    <my-box-body>And the body: {{ctrl.body}}</my-box-body>
-    <!-- This will be ignored -->
-    <my-box-body>This should never be shown</my-box-body>
-  </my-box>
-
-
   <!-- Uses the same camelCase style as angularjs directives -->
   <componitor-template name="myBox">
     <!-- The template goes here -->
@@ -49,12 +48,20 @@
  </file>
  <file name="style.css">
   .my-box {
-    display: inline-block;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
     width: 150px;
     height: 150px;
-    float: left;
     border: 1px solid #333;
+    margin-left: 10px;
   }
+ .clearfix:after {
+   content: ' ';
+   display: block;
+   clear: both;
+ }
  </file>
 </example>
  */
@@ -72,6 +79,9 @@
  *
  * NOTE: Not a real directive. The contents of the `<componitor-template />` elements are parsed in the `.config`
  * method. I.e., the tags must be present when the angular application is bootstrapped.
+ *
+ *
+ * For usage example see {@link componitor}
  *
  */
 var componitor = angular.module('componitor', [])

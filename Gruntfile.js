@@ -54,6 +54,8 @@ module.exports = function(grunt) {
           '<%= concat.dist.dest %>'
         ],
         title: 'componitor',
+        startPage: 'api/componitor',
+        titleLink: '#/api/componitor',
         html5Mode: false
       },
       api: {
@@ -63,7 +65,7 @@ module.exports = function(grunt) {
     },
     watch: {
       ngdocs: {
-        files: ['<%= sources %>', '<%= ngdocFiles %>'],
+        files: ['Gruntfile.js', '<%= sources %>', '<%= ngdocFiles %>'],
         tasks: ['after-test']
       }
     }
