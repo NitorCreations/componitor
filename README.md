@@ -36,7 +36,15 @@ into this:
 
 ## Installation
 
-Dependencies:
+### Bower
+
+    bower install componitor
+    
+### Download
+
+Download it [here](dist/componitor.js), or [minified](componitor.min.js)
+
+### Dependencies
 * `angularjs >= 1.2`, tested on `1.2.16`
 
 ## Features
