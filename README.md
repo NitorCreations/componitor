@@ -10,8 +10,8 @@
 
 ## Features
 
-   
+See [documentation](dist/docs) for usage examples.
 
 ## License
 
-  MIT
+  [MIT](LICENSE)
