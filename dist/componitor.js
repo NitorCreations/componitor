@@ -1,4 +1,4 @@
-/** Componitor v. 0.1.0 */
+/** Componitor v. 0.2.0-SNAPSHOT */
 (function(exports, global) {
     global["true"] = exports;
     var componitor = angular.module("componitor", []).config([ "$compileProvider", function($compileProvider) {
@@ -16,7 +16,7 @@
                         angular.forEach(contents, function(c) {
                             var contentTag = angular.element(c);
                             var selector = contentTag.attr("selector");
-                            var realContent = realElem.find(selector).html();
+                            var realContent = angular.element(realElem[0].querySelector(selector)).html();
                             contentTag.replaceWith(realContent);
                         });
                         realElem.html(template.html());

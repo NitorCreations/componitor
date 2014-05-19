@@ -69,7 +69,7 @@
  * @ngdoc directive
  * @name componitor.directive:componitorTemplate
  * @module componitor
- * @restrict AE
+ * @restrict E
  *
  * @param {String} name an AngularJs-style camelCased representation of the created directive's name. Use two part names containing a dash to avoid future problems.
  *
@@ -79,10 +79,48 @@
  *
  * NOTE: Not a real directive. The contents of the `<componitor-template />` elements are parsed in the `.config`
  * method. I.e., the tags must be present when the angular application is bootstrapped.
+ */
+/**
+ * @ngdoc directive
+ * @name componitor.directive:content
+ * @module componitor
+ * @restrict E
  *
+ * @param {string} selector the selector the find the content with
  *
- * For usage example see {@link componitor}
+ * @description
+ * This element is replaced with the content found by the `selector` attribute when
+ * rendering the final markup.
  *
+ * Uses `querySelector` to find the corresponding content. Use only the selectors
+ * natively supported by the browsers you need to support.
+ *
+ * NOTE: Not a real directive. The contents of the `<componitor-template />` elements are parsed in the `.config`
+ * method. I.e., the tags must be present when the angular application is bootstrapped.
+ *
+ * @example
+ *
+<example>
+ <file name="example.html">
+    <my-box>
+      <span class="the-heading">The heading</span>
+      <div the-content>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/f/f3/Youngkitten.JPG" width="200" />
+      </div>
+    </my-box>
+
+    <componitor-template name="myBox">
+      <div class="my-box">
+        <h1 class="my-box-heading">
+          <content selector=".the-heading" />
+        </h1>
+        <div class="my-box-content">
+          <content selector="[the-content]" />
+        </div>
+      </div>
+    </componitor-template>
+ </file>
+</example>
  */
 var componitor = angular.module('componitor', [])
   .config(['$compileProvider', function($compileProvider) {
@@ -104,7 +142,7 @@ var componitor = angular.module('componitor', [])
               // Replace each of the <content /> elements with their selector
               var contentTag = angular.element(c);
               var selector = contentTag.attr('selector');
-              var realContent = realElem.find(selector).html();
+              var realContent = angular.element(realElem[0].querySelector(selector)).html();
 
               contentTag.replaceWith(realContent);
             });

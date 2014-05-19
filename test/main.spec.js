@@ -58,10 +58,10 @@ describe('component generation', function() {
     });
   });
 
-  describe('multiple substitutions, order agnostic', function() {
+  describe('multiple substitutions, order agnostic, finds by class name and attribute', function() {
     start(
-      '<my-box-content>1+2={{1+2}}</my-box-content><my-box-title>Hooray!</my-box-title>',
-      '<h2><content selector="my-box-title" /></h2><p><content selector="my-box-content" /></p>'
+      '<div class="my-box-content">1+2={{1+2}}</div><div my-box-title>Hooray!</div>',
+      '<h2><content selector="[my-box-title]" /></h2><p><content selector=".my-box-content" /></p>'
     );
 
     it('should render the contents in their respective <content/> locations', function() {

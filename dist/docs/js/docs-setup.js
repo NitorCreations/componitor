@@ -19,7 +19,16 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "componitor",
       "shortDescription": "Registers a new html template directive with the given name. The componitor-template is",
-      "keywords": "ae angular angularjs-style api application automatically avoid bootstrapped camelcased componitor componitor-template config contents created dash directive display elements example future hidden html method names note parsed problems real registers representation settings style tags template usage view"
+      "keywords": "angular angularjs-style api application automatically avoid bootstrapped camelcased componitor componitor-template config contents created dash directive display elements future hidden html method names note parsed problems real registers representation settings style tags template view"
+    },
+    {
+      "section": "api",
+      "id": "componitor.directive:content",
+      "shortName": "content",
+      "type": "directive",
+      "moduleName": "componitor",
+      "shortDescription": "This element is replaced with the content found by the selector attribute when",
+      "keywords": "angular api application attribute bootstrapped browsers class componitor config content contents corresponding directive element elements example final find heading html http jpg markup method my-box my-box-content my-box-heading mybox natively note org parsed queryselector real rendering replaced selector selectors src support supported tags the-content the-heading width wikimedia"
     }
   ],
   "apis": {
