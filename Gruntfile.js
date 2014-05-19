@@ -32,6 +32,9 @@ module.exports = function(grunt) {
       unit: {
         singleRun: true
       },
+      travis: {
+        browsers: ['Firefox', 'PhantomJS']
+      },
       watch: {
         singleRun: false
       }
@@ -79,4 +82,6 @@ module.exports = function(grunt) {
   grunt.registerTask('after-test', ['build']);
   grunt.registerTask('build', ['clean:dist', 'concat:dist', 'uglify:dist', 'ngdocs:api']);
   grunt.registerTask('default', ['before-test','test','after-test']);
+
+  grunt.registerTask('travis', ['before-test', 'karma:travis']);
 };
