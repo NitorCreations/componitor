@@ -17,8 +17,12 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "src",
     "test",
-    "tests"
+    "tests",
+    "package.json",
+    "karma.conf.js",
+    "README.md"
   ],
   "devDependencies": {
     "angular": "~1.2.16",
