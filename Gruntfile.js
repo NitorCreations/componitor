@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       dist: ['<%= dist %>']
     },
     jshint: {
-      files: ['Gruntfile.js','<%= sources %>'],
+      files: ['Gruntfile.js','<%= sources %>','<%= tests %>'],
       options: {
         jshintrc: '.jshintrc'
       }
