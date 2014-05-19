@@ -27,11 +27,10 @@ module.exports = function(grunt) {
     },
     karma: {
       options: {
-        configFile: 'karma.conf.js'
-      },
-      unit: {
+        configFile: 'karma.conf.js',
         singleRun: true
       },
+      unit: {},
       travis: {
         browsers: ['Firefox', 'PhantomJS']
       },
