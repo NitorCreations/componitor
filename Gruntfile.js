@@ -16,6 +16,9 @@ module.exports = function(grunt) {
     sources: 'src/**/*.js',
     tests: 'test/**/*.js',
     ngdocFiles: 'src/**/*.ngdoc',
+    clean: {
+      dist: ['<%= dist %>']
+    },
     jshint: {
       files: ['Gruntfile.js','<%= sources %>'],
       options: {
@@ -74,6 +77,6 @@ module.exports = function(grunt) {
   grunt.registerTask('before-test', ['jshint']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('after-test', ['build']);
-  grunt.registerTask('build', ['concat:dist', 'uglify:dist', 'ngdocs:api']);
+  grunt.registerTask('build', ['clean:dist', 'concat:dist', 'uglify:dist', 'ngdocs:api']);
   grunt.registerTask('default', ['before-test','test','after-test']);
 };
