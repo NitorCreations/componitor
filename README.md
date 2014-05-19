@@ -1,5 +1,5 @@
 
-[![Build Status](https://secure.travis-ci.org/reko/componitor.png)](https://travis-ci.org/reko/componitor)
+[![Build Status](https://secure.travis-ci.org/NitorCreations/componitor.png)](https://travis-ci.org/NitorCreations/componitor)
 
 # componitor
 
