@@ -33,7 +33,6 @@ describe('component generation', function() {
       angular.bootstrap(document, ['componitor', 'testCtrlModule']);
     });
     afterEach(function() {
-//      console.log(angular.element('<b>').append(realElement().clone()).html());
       element.remove();
     });
   }
@@ -70,7 +69,7 @@ describe('component generation', function() {
     });
   });
 
-  describe('multiple templates inside each other', function() {
+  describe('nested templates', function() {
     startWithHtml('<div id="componitorTest" ng-controller="TestCtrl">' +
       '<my-box>' +
         '<p>' +

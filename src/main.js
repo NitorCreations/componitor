@@ -77,10 +77,12 @@
 var componitor = angular.module('componitor', [])
   .config(['$compileProvider', function($compileProvider) {
     function createDirective(name, templateHtml) {
+
       $compileProvider.directive(name, ['$compile', function($compile) {
         return {
           scope: true,
           restrict: 'E',
+          terminal: true,
           link: function(s,realElem) {
             realElem.addClass('componitor-component');
 
