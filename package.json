@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/NitorCreations/componitor/issues"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "homepage": "https://github.com/NitorCreations/componitor",
   "devDependencies": {
     "grunt": "^0.4.5",
