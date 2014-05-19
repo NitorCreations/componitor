@@ -52,8 +52,9 @@ describe('component generation', function() {
       expect(realElement().html()).toEqual('<h1 class="ng-scope ng-binding">The title is great!</h1>');
     });
 
-    it('should add the .componitor-component class', function() {
+    it('should add the .componitor-component classes', function() {
       expect(realElement().attr('class')).toContain('componitor-component');
+      expect(realElement().attr('class')).toContain('componitor-component-myBox');
     });
   });
 
@@ -94,6 +95,8 @@ describe('component generation', function() {
       '</div>');
 
     it('should render the components inside each other', function() {
+      expect(realElement().find('labeled-input').attr('class')).toContain('componitor-component');
+      expect(realElement().find('labeled-input').attr('class')).toContain('componitor-component-labeledInput');
       expect(realElement().find('label').text()).toEqual('The label');
       expect(realElement().find('input').length).toBe(1);
     });

@@ -85,6 +85,7 @@ var componitor = angular.module('componitor', [])
           terminal: true,
           link: function(s,realElem) {
             realElem.addClass('componitor-component');
+            realElem.addClass('componitor-component-' + name);
 
             var template = angular.element('<p>').append(angular.element(templateHtml).clone());
             // Find the content elements to be replaced by their selectors
