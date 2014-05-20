@@ -1,4 +1,4 @@
-Componitor [![Build Status](https://secure.travis-ci.org/NitorCreations/componitor.png)](https://travis-ci.org/NitorCreations/componitor)
+Componitor [![Build Status](https://secure.travis-ci.org/NitorCreations/componitor.png)](https://travis-ci.org/NitorCreations/componitor) [![Dependencies](https://david-dm.org/NitorCreations/componitor.png)]
 =========
 
   Simple html template -like structures to create reusable [AngularJS](https://angularjs.org) html template directives on-the-fly.
