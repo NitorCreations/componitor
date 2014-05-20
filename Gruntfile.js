@@ -85,11 +85,20 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('before-test', ['jshint']);
+  grunt.registerTask('before-test', ['enforce', 'jshint']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('after-test', ['build']);
   grunt.registerTask('build', ['clean:dist', 'uglify', 'ngdocs:api']);
   grunt.registerTask('default', ['before-test','test','after-test']);
 
   grunt.registerTask('travis', ['before-test', 'karma:travis']);
+
+  // Loaned from Angular-ui bootstrap
+  grunt.registerTask('enforce', 'Install commit message enforce script if it doesn\'t exist', function() {
+    if (!grunt.file.exists('.git/hooks/commit-msg')) {
+      grunt.file.copy('misc/validate-commit-msg.js', '.git/hooks/commit-msg');
+      require('fs').chmodSync('.git/hooks/commit-msg', '0755');
+    }
+  });
+
 };
