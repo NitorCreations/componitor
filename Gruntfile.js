@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         ],
         title: 'componitor',
         startPage: 'api/componitor',
-        titleLink: '#/api/componitor',
+        titleLink: 'https://github.com/NitorCreations/componitor',
         html5Mode: false
       },
       api: {
