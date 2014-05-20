@@ -8,46 +8,46 @@
  * Currently, the templates need the present on application bootstrap to be correctly loaded.
  *
  * @example
-<example module="componitor">
+ <example module="componitor">
  <file name="index.html">
 
-  <div class="clearfix" ng-controller="DemoCtrl as ctrl">
-    <h1>There should be a two boxes below with different contents</h1>
-    Title: <input type="text" ng-model="ctrl.title" />
-    Body: <input type="text" ng-model="ctrl.body" />
+ <div class="clearfix" ng-controller="DemoCtrl as ctrl">
+ <h1>There should be a two boxes below with different contents</h1>
+ Title: <input type="text" ng-model="ctrl.title" />
+ Body: <input type="text" ng-model="ctrl.body" />
 
 
-    <my-box>
-      <my-box-title>{{ctrl.title}}</my-box-title>
-      <my-box-body>{{ctrl.body}}</my-box-body>
-    </my-box>
+ <my-box>
+ <my-box-title>{{ctrl.title}}</my-box-title>
+ <my-box-body>{{ctrl.body}}</my-box-body>
+ </my-box>
 
-    <my-box>
-      <my-box-title>My title is: {{ctrl.title}}</my-box-title>
-      <my-box-body>And the body: {{ctrl.body}}</my-box-body>
-      <!-- This will be ignored -->
-      <my-box-body>This should never be shown</my-box-body>
-    </my-box>
+ <my-box>
+ <my-box-title>My title is: {{ctrl.title}}</my-box-title>
+ <my-box-body>And the body: {{ctrl.body}}</my-box-body>
+ <!-- This will be ignored -->
+ <my-box-body>This should never be shown</my-box-body>
+ </my-box>
 
-  </div>
-  <!-- Uses the same camelCase style as angularjs directives -->
-  <componitor-template name="myBox">
-    <!-- The template goes here -->
-    <div class="my-box">
-      <h3><content selector="my-box-title" /></h3>
-      <p><content selector="my-box-body" /></h3>
-    </div>
-  </componitor-template>
+ </div>
+ <!-- Uses the same camelCase style as angularjs directives -->
+ <componitor-template name="myBox">
+ <!-- The template goes here -->
+ <div class="my-box">
+ <h3><content selector="my-box-title" /></h3>
+ <p><content selector="my-box-body" /></h3>
+ </div>
+ </componitor-template>
 
  </file>
  <file name="script.js">
-  function DemoCtrl() {
+ function DemoCtrl() {
     this.title = "Title";
     this.body = "Lorem ipsum...";
   }
  </file>
  <file name="style.css">
-  .my-box {
+ .my-box {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -63,7 +63,7 @@
    clear: both;
  }
  </file>
-</example>
+ </example>
  */
 /**
  * @ngdoc directive
@@ -100,7 +100,7 @@
  *
  * @example
  *
-<example>
+<example module="componitor">
  <file name="example.html">
     <my-box>
       <span class="the-heading">The heading</span>
@@ -166,4 +166,13 @@ var componitor = angular.module('componitor', [])
       createDirective(name, templateElement.html());
     });
 
-  }]);
+  }])
+  .directive('componitorTemplate', [function() {
+    /** Prevent <componitor-template/> contents from being compiled */
+    return {
+      restrict: 'E',
+      priority: 1000,
+      terminal: true
+    };
+  }])
+  ;

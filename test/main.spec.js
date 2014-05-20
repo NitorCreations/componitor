@@ -4,14 +4,14 @@ describe('component generation', function() {
   var element;
 
   function createBody(componentBody, templateBody) {
-    return '<div id="componitorTest" ng-controller="TestCtrl">' +
-      '<my-box>' +
-        componentBody +
-      '</my-box>' +
+    return '<div ng-controller="TestCtrl">' +
+        '<my-box>' +
+          componentBody +
+        '</my-box>' +
+      '</div>' +
       '<componitor-template name="myBox">' +
         templateBody +
-      '</componitor-template>' +
-    '</div>';
+      '</componitor-template>';
   }
 
   function template() {
@@ -19,7 +19,7 @@ describe('component generation', function() {
   }
 
   function realElement() {
-    return element.children().eq(0);
+    return angular.element(element[0].querySelector('.componitor-component'));
   }
 
   function startWithHtml(html) {
@@ -28,7 +28,7 @@ describe('component generation', function() {
         $scope.title = 'great!';
       });
     beforeEach(function() {
-      angular.element(document.body).append(html);
+      angular.element(document.body).append('<div id="componitorTest">' + html + '</div>');
       element = angular.element(document.getElementById('componitorTest'));
       angular.bootstrap(document, ['componitor', 'testCtrlModule']);
     });
@@ -70,15 +70,43 @@ describe('component generation', function() {
     });
   });
 
+  describe('bindings in templates', function() {
+    startWithHtml(
+        '<div ng-controller="TestCtrl">' +
+          '<output-value />' +
+        '</div>' +
+        '<div ng-init="title=\'Foobar\'">' +
+          '<componitor-template name="outputValue">' +
+            '<span>Value:{{title}}</span>' +
+          '</componitor-template>' +
+        '</div>'
+    );
+
+    it('should get the value from TestCtrl where it is used, not the template\'s scope', function() {
+      expect(realElement().find('span').text()).toBe('Value:great!');
+    });
+  });
+
+  describe('template contents', function() {
+
+    startWithHtml('<div ng-init="value=50"><componitor-template name="tempLate"><span>{{value}}</span></componitor-template></div>');
+
+    it('should not be compiled', function() {
+      expect(template().find('span').text()).toEqual('{{value}}');
+    });
+  });
+
   describe('nested templates', function() {
-    startWithHtml('<div id="componitorTest" ng-controller="TestCtrl">' +
-      '<my-box>' +
-        '<p>' +
-          '<labeled-input>' +
-            '<span>The label</span>' +
-          '</labeled-input>' +
-        '</p>' +
-      '</my-box>' +
+    startWithHtml(
+      '<div ng-controller="TestCtrl">' +
+        '<my-box>' +
+          '<p>' +
+            '<labeled-input>' +
+              '<span>The label</span>' +
+            '</labeled-input>' +
+          '</p>' +
+        '</my-box>' +
+      '</div>' +
       // First template
       '<componitor-template name="myBox">' +
         '<div class="my-box">' +
@@ -91,8 +119,7 @@ describe('component generation', function() {
           '<content selector="span" />' +
           '<input type="text" />' +
         '</label>' +
-      '</componitor-template>' +
-      '</div>');
+      '</componitor-template>');
 
     it('should render the components inside each other', function() {
       expect(realElement().find('labeled-input').attr('class')).toContain('componitor-component');
