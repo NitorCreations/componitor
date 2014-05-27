@@ -102,19 +102,19 @@
  *
  <example module="componitor">
  <file name="example.html">
- <my-box>
+ <kitten-box>
  <span class="the-heading">The heading</span>
  <div the-content>
  <img src="http://upload.wikimedia.org/wikipedia/commons/f/f3/Youngkitten.JPG" width="200" />
  </div>
- </my-box>
+ </kitten-box>
 
- <componitor-template name="myBox">
- <div class="my-box">
- <h1 class="my-box-heading">
+ <componitor-template name="kittenBox">
+ <div class="kitten-box">
+ <h1 class="kitten-box-heading">
  <content selector=".the-heading" />
  </h1>
- <div class="my-box-content">
+ <div class="kitten-box-content">
  <content selector="[the-content]" />
  </div>
  </div>

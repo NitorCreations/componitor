@@ -42,14 +42,14 @@ var serviceModule = angular.module('componitor.service', [])
      * @example
      <example module="demoModule">
      <file name="index.html">
-     <my-box>
-      <my-box-title>Hello from index.html</my-box-title>
-     </my-box>
+     <hello-box>
+      <hello-box-title>Hello from index.html</hello-box-title>
+     </hello-box>
      </file>
      <file name="templates.html">
-     <componitor-template name="myBox">
-     <h1 class="my-box-title">
-     <content selector="my-box-title" />
+     <componitor-template name="helloBox">
+     <h1 class="hello-box-title">
+     <content selector="hello-box-title" />
      </h1>
      <p>Hello from templates.html</p>
      </componitor-template>
@@ -61,7 +61,7 @@ var serviceModule = angular.module('componitor.service', [])
     });
      </file>
      <file name="styles.css">
-      my-box {
+      hello-box {
         display: block;
         padding: 1em;
         border: 1px solid #333;
