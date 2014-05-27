@@ -44,10 +44,6 @@ describe('component generation', function() {
   describe('simple case', function() {
     start('<my-box-title>The title is {{title}}</my-box-title>', '<h1><content selector="my-box-title" /></h1>');
 
-    it('should hide the <componitor-element />', function() {
-      expect(template().css('display')).toBe('none');
-    });
-
     it('should render the contents for the real element', function() {
       expect(realElement().html()).toEqual('<h1 class="ng-scope ng-binding">The title is great!</h1>');
     });
@@ -88,7 +84,6 @@ describe('component generation', function() {
   });
 
   describe('template contents', function() {
-
     startWithHtml('<div ng-init="value=50"><componitor-template name="tempLate"><span>{{value}}</span></componitor-template></div>');
 
     it('should not be compiled', function() {
