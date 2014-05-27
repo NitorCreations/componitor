@@ -25,7 +25,7 @@ describe('Componitor service', function () {
     describe('with duplicate names', function () {
       it('should throw Error', function () {
         expect(function () {
-          Componitor.process('<componitor-template name="myTemplate"></componitor-template><componitor-template name="myTemplate"></componitor-template>')
+          Componitor.process('<componitor-template name="myTemplate"></componitor-template><componitor-template name="myTemplate"></componitor-template>');
         }).toThrow(new Error('Duplicate template name: "myTemplate"'));
       });
     });
