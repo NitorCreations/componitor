@@ -1,0 +1,48 @@
+<h1><code ng:non-bindable="">content</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">componitor</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="componitor-directive-page componitor-directive-content-page"><p>This element is replaced with the content found by the <code>selector</code> attribute when
+rendering the final markup.</p>
+<p>Uses <code>querySelector</code> to find the corresponding content. Use only the selectors
+natively supported by the browsers you need to support.</p>
+<p>NOTE: Not a real directive. The contents of the <code>&lt;componitor-template /&gt;</code> elements are parsed in the <code>.config</code>
+method. I.e., the tags must be present when the angular application is bootstrapped.</p>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as element:<pre class="prettyprint linenums">&lt;content
+       selector="{string}"&gt;
+&lt;/content&gt;</pre>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>selector</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="componitor-directive-page componitor-directive-content-page"><p>the selector the find the content with</p>
+</div></td></tr></tbody></table></div>
+<h2 id="example">Example</h2>
+<div class="example"><div class="componitor-directive-page componitor-directive-content-page"><h4 id="example_source">Source</h4>
+<div source-edit="componitor" source-edit-deps="angular.js" source-edit-html="example.html" source-edit-css="" source-edit-js="" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
+<div class="tabbable"><div class="tab-pane" title="example.html">
+<pre class="prettyprint linenums" ng-set-text="example.html"></pre>
+<script type="text/ng-template" id="example.html">
+<kitten-box>
+<span class="the-heading">The heading</span>
+<div the-content>
+<img src="http://upload.wikimedia.org/wikipedia/commons/f/f3/Youngkitten.JPG" width="200" />
+</div>
+</kitten-box>
+
+<componitor-template name="kittenBox">
+<div class="kitten-box">
+<h3 class="kitten-box-heading" id="example_-">
+<content selector=".the-heading" />
+</h3>
+<div class="kitten-box-content">
+<content selector="[the-content]" />
+</div>
+</div>
+</componitor-template>
+</script>
+</div>
+</div><h4 id="example_-_demo">Demo</h4>
+<div class="well doc-example-live animate-container" ng-embed-app="componitor" ng-set-html="example.html" ng-eval-javascript=""></div>
+</div></div>
+</div>

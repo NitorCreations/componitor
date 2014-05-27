@@ -1,0 +1,11 @@
+
+# IntelliJ
+.idea
+*.iml
+
+# Bower / NPM
+node_modules/
+bower_components/
+
+# Jekyll
+_site/
