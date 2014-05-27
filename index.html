@@ -6,9 +6,95 @@ title: Componitor
 <div class="jumbotron">
   <h1>Componitor</h1>
   <p>Simple directive generation for web component -like templates to encourage reuse in AngularJS</p>
-  <a href="/dist/componitor.js" class="btn btn-primary" download="componitor.js">
+  <a href="{{site.download_url}}" class="btn btn-primary" download="componitor.js">
     <i class="fa fa-download"></i>
-    Download it here
+    Download it here (v. {{site.componitor_version}})
   </a>
 </div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-lg-4">
+      <h2>Reuse</h2>
+      <p>Easily create reusable directives for, e.g., layouts and ui components not needing complex logic</p>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <h2>Reduce</h2>
+      <p>Reduce repetition of html fragments to encourage the DRY principle. Easily add WAI-ARIA attributes to
+         common components without having to type them every time.</p>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <h2>Lazy-load</h2>
+      <p>Create layout directives just-in-time by calling <kbd>Componitor.process()</kbd> on a piece of html</p>
+    </div>
+  </div>
+
+  {% raw %}
+  <div class="row" ng-app="examples">
+    <h2>Example</h2>
+    <p>Bootstrap progess bars with Componitor</p>
+
+    <div> 
+      <h4>Demo</h4>
+      <div ng-controller="ProgressCtrl">
+        <bs-progress></bs-progress>
+        <button class="btn btn-primary" ng-click="randomize()">
+          Randomize value
+        </button>
+      </div>
+      
+      <componitor-template name="bsProgress" style="display:none;">
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{value}}%"
+            aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100">
+            <span>{{value}} / 100</span>
+          </div>
+        </div>
+      </componitor-template>
+    </div>
+    <div class="col-md-6 col-lg-6" ng-non-bindable>
+      <h4>Template</h4>
+      <pre>
+&lt;componitor-template name="bsProgress"&gt;
+  &lt;div class="progress"&gt;
+    &lt;div class="progress-bar progress-bar-success"
+            role="progressbar" style="width: {{value}}%"
+            aria-valuenow="{{value}}"
+            aria-valuemin="0" aria-valuemax="100" /&gt;
+  &lt;/div&gt;
+&lt;/componitor-template&gt;</pre>
+      <h4>HTML</h4>
+<pre>&lt;bs-progress&gt;&lt;/bs-progress&gt;
+&lt;button class="btn btn-primary" ng-click="randomize()"&gt;
+  Randomize value
+&lt;/button&gt;</pre>
+    </div>
+    <div class="col-md-6 col-lg-6" ng-non-bindable>
+      <h4>JavaScript</h4>
+      <pre>
+angular.module('examples', ['componitor'])
+  .controller('ProgressCtrl', function($scope) {
+    $scope.value = 60;
+    $scope.randomize = function() {
+      $scope.value = Math.round(Math.random()*100);
+    };
+  });</pre>
+    </div>
+  </div>
+  {% endraw %}
+
+  
+
+  <script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+  <script src="{{site.download_url}}"></script>
+  <script>
+    angular.module('examples', ['componitor'])
+      .controller('ProgressCtrl', function($scope, $http) {
+        $scope.value = 60;
+        $scope.randomize = function() {
+          $scope.value = Math.round(Math.random()*100);
+        };
+      });
+  </script>
+
+</div>

@@ -2,3 +2,8 @@ safe: true
 exclude: ['node_modules', 'bower_components']
 markdown: redcarpet
 pygments: true
+
+# Componitor-specific
+componitor_version: 0.2.0-SNAPSHOT
+#download_url: /dist/componitor.js
+download_url: https://nitorcreations.github.io/componitor/dist/componitor.js
