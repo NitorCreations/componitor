@@ -20,7 +20,7 @@
     "src",
     "test",
     "tests",
-    "misc"
+    "misc",
     "package.json",
     "karma.conf.js",
     "README.md"
