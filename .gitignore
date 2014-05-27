@@ -9,3 +9,6 @@ bower_components/
 
 # Docs
 dist/
+
+#Generated site
+_site/
