@@ -83,18 +83,26 @@ angular.module('examples', ['componitor'])
   </div>
   {% endraw %}
 
-  
 
-  <script src="https://code.angularjs.org/1.2.16/angular.js"></script>
-  <script src="{{site.download_url}}"></script>
-  <script>
-    angular.module('examples', ['componitor'])
-      .controller('ProgressCtrl', function($scope, $http) {
-        $scope.value = 60;
-        $scope.randomize = function() {
-          $scope.value = Math.round(Math.random()*100);
-        };
-      });
-  </script>
-
+  <div class="row">
+    <div>
+      <h2>License</h2>
+      <a href="http://opensource.org/licenses/MIT">
+        MIT License
+      </a>
+    </div>
+  </div>
 </div>
+
+<script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+<script src="{{site.download_url}}"></script>
+<script>
+  angular.module('examples', ['componitor'])
+    .controller('ProgressCtrl', function($scope, $http) {
+      $scope.value = 60;
+      $scope.randomize = function() {
+        $scope.value = Math.round(Math.random()*100);
+      };
+    });
+</script>
+

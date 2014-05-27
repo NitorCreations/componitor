@@ -8,6 +8,30 @@
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <style type="text/css">
+      .main {
+        position: absolute;
+        z-index: 2;
+        margin-bottom: 100px;
+        padding-bottom: 50px;
+        background: white;
+        width: 100%;
+      }
+      .footer {
+        position: fixed;
+        z-index: 1;
+        bottom: 0;
+        height: 100px;
+        background: #000;
+        color: #eee;
+        text-align: center;
+        width: 100%;
+      }
+      .footer img {
+        height: 50px;
+        margin-top: 25px;
+      }
+    </style>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </head>
@@ -38,9 +62,14 @@
       </nav>
     </header>
     <div class="header-placeholder" style="height: 50px" ></div>
-    <div class="container">
-      {{ content }}
+    <div class="main">
+      <div class="container">
+        {{ content }}
+      </div>
     </div>
+    <footer class="footer">
+      <img src="images/nitor_logo.svg" style="max-height: 50%"/>
+    </footer>
   </body>
 </html>
 
