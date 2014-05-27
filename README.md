@@ -40,16 +40,13 @@ into this:
 
     bower install componitor
     
-### Download
-
-Download it [here](dist/componitor.js), or [minified](componitor.min.js)
-
 ### Dependencies
 * `angularjs >= 1.2`, tested on `1.2.16`
+*  modern browser or [es5-shim](https://github.com/es-shims/es5-shim)
 
 ## Features
 
-See [documentation](dist/docs) for usage examples.
+See [documentation](https://nitorcreations.github.io/componitor/) for usage examples.
 
 ## License
 
