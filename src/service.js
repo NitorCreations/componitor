@@ -7,6 +7,7 @@
  * The module for the template registration service. See the {@link componitor.service.Componitor Componitor} service
  *
  * @see componitor.service.Componitor
+ *
  */
 var serviceModule = angular.module('componitor.service', [])
   .config(['$compileProvider', function ($compileProvider) {
@@ -34,9 +35,39 @@ var serviceModule = angular.module('componitor.service', [])
      * Parses and registers the directives for the found `<componitor-template />`
      * elements from the given html fragment.
      *
-     * Usage: Call `#process` for the html fragment
+     * Usage: Call `#process` for the html fragment. See example below for more.
      *
      * @see componitor.service.Componitor#process
+     *
+     * @example
+     <example module="demoModule">
+     <file name="index.html">
+     <my-box>
+      <my-box-title>Hello from index.html</my-box-title>
+     </my-box>
+     </file>
+     <file name="templates.html">
+     <componitor-template name="myBox">
+     <h1 class="my-box-title">
+     <content selector="my-box-title" />
+     </h1>
+     <p>Hello from templates.html</p>
+     </componitor-template>
+     </file>
+     <file name="script.js">
+     angular.module('demoModule', ['componitor'])
+     .run(function($templateCache, Componitor) {
+      Componitor.process($templateCache.get('templates.html'));
+    });
+     </file>
+     <file name="styles.css">
+      my-box {
+        display: block;
+        padding: 1em;
+        border: 1px solid #333;
+      }
+     </file>
+     </example>
      */
     function Componitor() {
       var self = this;
