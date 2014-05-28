@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     tests: 'test/**/*.js',
     ngdocFiles: 'src/**/*.ngdoc',
     clean: {
-      dist: ['<%= dist %>']
+      dist: ['<%= dist %>','_site']
     },
     jshint: {
       files: ['Gruntfile.js','<%= sources %>','<%= tests %>'],
