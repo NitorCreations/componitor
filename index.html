@@ -30,55 +30,79 @@ title: Componitor
   </div>
 
   {% raw %}
-  <div class="row" ng-app="examples">
-    <h2>Example</h2>
-    <p>Bootstrap progess bars with Componitor</p>
+  <div ng-app="examples">
+    <h2>Demo <small>Bootstrap progress bar</small></h2>
 
-    <div> 
-      <h4>Demo</h4>
-      <div ng-controller="ProgressCtrl">
-        <bs-progress></bs-progress>
-        <button class="btn btn-primary" ng-click="randomize()">
-          Randomize value
-        </button>
-      </div>
-      
-      <componitor-template name="bsProgress" style="display:none;">
-        <div class="progress">
-          <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{value}}%"
-            aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100">
-            <span>{{value}} / 100</span>
-          </div>
+    <div class="row"> 
+      <div class="well col-lg-12 col-md-12">
+        <div ng-controller="ProgressCtrl as ctrl">
+          <bs-progress values="ctrl.progress"></bs-progress>
+          <button class="btn btn-primary" ng-click="ctrl.randomize()">
+            Randomize values
+          </button>
         </div>
-      </componitor-template>
+        
+        <componitor-template name="bsProgress" isolate="true" style="display:none;">
+          <div class="progress">
+            <bs-bar values="{type: 'success', value: values.success}"></bs-bar>
+            <bs-bar values="{type: 'warning', value: values.warning}"></bs-bar>
+          </div>
+        </componitor-template>
+        <componitor-template name="bsBar" isolate="true" style="display: none;">
+          <div class="progress-bar progress-bar-{{values.type}}"
+            style="width: {{values.value}}%"
+            aria-valuenow="{{values.value}}" aria-valuemin="0" aria-valuemax="100">
+            <span>{{values.value}}%</span>
+          </div>
+        </componitor-template>
+      </div>
     </div>
-    <div class="col-md-6 col-lg-6" ng-non-bindable>
-      <h4>Template</h4>
-      <pre>
-&lt;componitor-template name="bsProgress"&gt;
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6" ng-non-bindable>
+        <h4>Usage</h4>
+<pre>&lt;div ng-controller="ProgressCtrl as ctrl"&gt;
+  &lt;bs-progress values="ctrl.progress"&gt;&lt;/bs-progress&gt;
+  &lt;button class="btn btn-primary" ng-click="ctrl.randomize()"&gt;
+    Randomize values
+  &lt;/button&gt;
+&lt;/div&gt;</pre>
+        <h4>Template</h4>
+<pre>&lt;componitor-template name="bsProgress" isolate="true" &gt;
   &lt;div class="progress"&gt;
-    &lt;div class="progress-bar progress-bar-success"
-            role="progressbar" style="width: {{value}}%"
-            aria-valuenow="{{value}}"
-            aria-valuemin="0" aria-valuemax="100" /&gt;
+    &lt;bs-bar values="{type: 'success', value: values.success}"&gt;
+    &lt;/bs-bar&gt;
+    &lt;bs-bar values="{type: 'warning', value: values.warning}"&gt;
+    &lt;/bs-bar&gt;
+  &lt;/div&gt;
+&lt;/componitor-template&gt;
+&lt;componitor-template name="bsBar" isolate="true" &gt;
+  &lt;div class="progress-bar progress-bar-{{values.type}}"
+      style="width: {{values.value}}%"
+      aria-valuenow="{{values.value}}"
+      aria-valuemin="0" aria-valuemax="100"&gt;
+    &lt;span&gt;{{values.value}}%&lt;/span&gt;
   &lt;/div&gt;
 &lt;/componitor-template&gt;</pre>
-      <h4>HTML</h4>
-<pre>&lt;bs-progress&gt;&lt;/bs-progress&gt;
-&lt;button class="btn btn-primary" ng-click="randomize()"&gt;
-  Randomize value
-&lt;/button&gt;</pre>
-    </div>
-    <div class="col-md-6 col-lg-6" ng-non-bindable>
-      <h4>JavaScript</h4>
-      <pre>
+      </div>
+      <div class="col-md-6 col-lg-6" ng-non-bindable>
+        <h4>JavaScript</h4>
+        <pre>
 angular.module('examples', ['componitor'])
-  .controller('ProgressCtrl', function($scope) {
-    $scope.value = 60;
-    $scope.randomize = function() {
-      $scope.value = Math.round(Math.random()*100);
+  .controller('ProgressCtrl', function() {
+    this.progress = {
+      success: 40,
+      warning: 20
+    };
+    function randomInt(maxVal) {
+      return Math.round(Math.random()*maxVal);
+    }
+    this.randomize = function() {
+      this.progress.success = randomInt(100);
+      this.progress.warning = randomInt(100-this.progress.success);
     };
   });</pre>
+      </div>
     </div>
   </div>
   {% endraw %}
@@ -98,10 +122,14 @@ angular.module('examples', ['componitor'])
 <script src="{{site.download_url}}"></script>
 <script>
   angular.module('examples', ['componitor'])
-    .controller('ProgressCtrl', function($scope, $http) {
-      $scope.value = 60;
-      $scope.randomize = function() {
-        $scope.value = Math.round(Math.random()*100);
+    .controller('ProgressCtrl', function() {
+      this.progress = {
+        success: 40,
+        warning: 20
+      };
+      this.randomize = function() {
+        this.progress.success = Math.round(Math.random()*100);
+        this.progress.warning = Math.round(Math.random()*(100 - this.progress.success));
       };
     });
 </script>
