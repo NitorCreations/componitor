@@ -1,6 +1,6 @@
 {
   "name": "componitor",
-  "version": "0.2.0-SNAPSHOT",
+  "version": "0.2.0",
   "description": "Simple webcomponent-like structures to create reusable AngularJs html template directives on-the-fly",
   "main": "dist/componitor.js",
   "repository": {
