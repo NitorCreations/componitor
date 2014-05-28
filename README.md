@@ -8,29 +8,30 @@ Componitor [![Build Status](https://secure.travis-ci.org/NitorCreations/componit
 Turns this:
 
     <body ng-app="...">
-    	<labeled-input>
-        	<label>Username:</label>
-        </labeled-input>
+      <labeled-input values="{model: user.username}">
+        <label>Username:</label>
+      </labeled-input>
         
-        <componitor-template name="labeledInput">
-        	<label>
-            	<span class="labeled-input-heading">
-                	<content selector="label" />
-                </span>
-                <input type="text" />
-            </label>
-        </componitor-template>
+      <componitor-template name="labeledInput">
+        <label>
+          <span class="labeled-input-heading">
+            <content selector="label" />
+          </span>
+          <input type="text" ng-model="values.model"/>
+        </label>
+      </componitor-template>
     </body>
 
 into this:
 
     <body ng-app="...">
-    	<labeled-input>
-        	<label>
-            	<span>Username:</span>
-                <input type="text" />
-        	</label>
-        </labeled-input>
+      <labeled-input>
+        <label>
+          <span>Username:</span>
+          <!-- Points to parent scope's user.username -->
+          <input type="text" ng-model="values.model"/> 
+        </label>
+      </labeled-input>
         ...
     </body>
 
