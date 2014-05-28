@@ -23,7 +23,11 @@
     "misc",
     "package.json",
     "karma.conf.js",
-    "README.md"
+    "README.md",
+    "_layouts",
+    "_site",
+    "images"
+    "dist/docs"
   ],
   "devDependencies": {
     "angular": "~1.2.16",
