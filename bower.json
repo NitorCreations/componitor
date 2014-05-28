@@ -26,7 +26,7 @@
     "README.md",
     "_layouts",
     "_site",
-    "images"
+    "images",
     "dist/docs"
   ],
   "devDependencies": {
