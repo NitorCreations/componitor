@@ -1,5 +1,4 @@
 
-
 module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -69,7 +68,7 @@ module.exports = function(grunt) {
         ],
         title: 'componitor',
         startPage: 'api/componitor',
-        titleLink: 'https://github.com/NitorCreations/componitor',
+        titleLink: 'https://nitorcreations.github.io/componitor',
         html5Mode: false
       },
       api: {
