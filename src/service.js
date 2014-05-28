@@ -154,7 +154,7 @@ var serviceModule = angular.module('componitor.service', [])
         if (!name) {
           throw '<componitor-template /> name should be the camelCased name of the created directive';
         }
-        self._createDirective(name, isolate === "true", templateElement.html());
+        self._createDirective(name, isolate === 'true', templateElement.html());
       };
 
       /**

@@ -66,7 +66,7 @@ describe('Componitor service', function () {
     });
   });
 
-  ddescribe('with isolate="true" on the template', function() {
+  describe('with isolate="true" on the template', function() {
 
     beforeEach(function() {
       Componitor.process(
