@@ -46,7 +46,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "componitor.service",
       "shortDescription": "Parses and registers the directives for the found &lt;componitor-template /&gt;",
-      "keywords": "$compile $compileprovider _createdirective _processtemplate angular angularjs-style api block border call called camelcased class componitor componitor-templates contents css demomodule directive directive-to-be directives display element elements example find fragment hello-box hello-box-title hellobox html htmltoprocess js method module padding parse parses process processes public registers representation script selector service solid styles target template templatehtml templates usage usages"
+      "keywords": "$compile $compileprovider _createdirective _processtemplate add angular angularjs-style api attribute block border call called camelcased class componitor componitor-templates contents create css demomodule directive directive-to-be directives display element elements example find fragment hello-box hello-box-title hellobox html htmltoprocess isolate isolated js method module padding parse parses process processes public registers representation scope script selector service solid styles target template templatehtml templates true usage usages values"
     }
   ],
   "apis": {

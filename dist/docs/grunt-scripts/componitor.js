@@ -1,4 +1,4 @@
-/** Componitor v. 0.2.0-SNAPSHOT */
+/** Componitor v. 0.2.0 */
 (function(exports, global) {
     global["true"] = exports;
     var componitorModule = angular.module("componitor", [ "componitor.service" ]).run([ "$document", "Componitor", function($document, Componitor) {
@@ -19,17 +19,19 @@
         function Componitor() {
             var self = this;
             self._directiveNames = [];
-            self._createDirective = function _createDirective(name, templateHtml) {
+            self._createDirective = function _createDirective(name, isolate, templateHtml) {
                 if (self._directiveNames.indexOf(name) !== -1) {
                     throw new Error('Duplicate template name: "' + name + '"');
                 }
                 self._directiveNames.push(name);
                 serviceModule._addDirective(name, [ "$compile", function($compile) {
                     return {
-                        scope: true,
+                        scope: isolate ? {
+                            values: "="
+                        } : true,
                         restrict: "AE",
                         terminal: true,
-                        link: function(s, realElem) {
+                        link: function(scope, realElem) {
                             realElem.addClass("componitor-component");
                             realElem.addClass("componitor-component-" + name);
                             var template = copyHtml(templateHtml);
@@ -41,7 +43,7 @@
                                 contentTag.replaceWith(realContent);
                             });
                             realElem.html(template.html());
-                            $compile(realElem.contents())(s);
+                            $compile(realElem.contents())(scope);
                         }
                     };
                 } ]);
@@ -52,10 +54,11 @@
                     display: "none"
                 });
                 var name = templateElement.attr("name");
+                var isolate = templateElement.attr("isolate");
                 if (!name) {
                     throw "<componitor-template /> name should be the camelCased name of the created directive";
                 }
-                self._createDirective(name, templateElement.html());
+                self._createDirective(name, isolate === "true", templateElement.html());
             };
             self.process = function(htmlToProcess) {
                 var templates = copyHtml(htmlToProcess).find("componitor-template");

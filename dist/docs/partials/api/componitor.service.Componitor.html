@@ -9,12 +9,15 @@ elements from the given html fragment.</p>
 <p>Usage: Call <code>#process</code> for the html fragment. See example below for more.</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><h3 id="methods__createdirective">_createDirective(name, templateHtml)</h3>
+<ul class="methods"><li><h3 id="methods__createdirective">_createDirective(name, isolate, templateHtml)</h3>
 <div class="_createdirective"><div class="componitor-service-componitor-createdirective-page"><p><em>NOT PART OF THE PUBLIC API</em></p>
 <p>Registers a componitor template directive with the <code>$compileProvider</code>.
 This method should be called before the html containing the usages of
 the templates is <code>$compile</code>d.</p>
+<p>If you add <code>isolate=&quot;true&quot;</code> to the template, the template&#39;s scope will be isolated
+with the value of the attribute <code>values</code> made available to the scope.</p>
 </div><h5 id="methods__createdirective_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>name</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="componitor-service-componitor-createdirective-page"><p>the camelCased angularjs-style representation of the directive-to-be&#39;s name</p>
+</div></td></tr><tr><td>isolate</td><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="componitor-service-componitor-createdirective-page"><p>whether or not to create isolated scope for the template.</p>
 </div></td></tr><tr><td>templateHtml</td><td><a href="" class="label type-hint type-hint-text">text/html</a></td><td><div class="componitor-service-componitor-createdirective-page"><p>the contents of the <code>&lt;componitor-template /&gt;</code> block</p>
 </div></td></tr></tbody></table></div>
 </li>
