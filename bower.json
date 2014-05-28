@@ -27,7 +27,10 @@
     "_layouts",
     "_site",
     "images",
-    "dist/docs"
+    "dist/docs",
+    "Gemfile",
+    "_config.yml",
+    "index.html"
   ],
   "devDependencies": {
     "angular": "~1.2.16",
