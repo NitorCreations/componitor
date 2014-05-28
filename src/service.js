@@ -102,15 +102,25 @@ var serviceModule = angular.module('componitor.service', [])
             scope: true,
             restrict: 'AE',
             terminal: true,
-            link: function (s, realElem, attrs) {
+            link: function (scope, realElem, attrs) {
               realElem.addClass('componitor-component');
               realElem.addClass('componitor-component-' + name);
 
-              attrs.$observe('values', function(v) {
-                s.values = s.$eval(v);
-                if (!s.$$phase && !s.$root.$$phase) {
-                  s.$apply();
+              /**
+               * Tracks the values attribute and keeps the scope's
+               * values attribute up to date with the changes.
+               */
+              scope.$watch(function() {
+                if (!attrs.values) {
+                  return undefined;
                 }
+                var newVal = scope.$eval(attrs.values);
+                if (!angular.equals(newVal, scope.values)) {
+                  return newVal;
+                }
+                return angular.equals(newVal, scope.values) ? scope.values : newVal;
+              }, function(v) {
+                scope.values = v;
               });
 
               var template = copyHtml(templateHtml);
@@ -127,7 +137,7 @@ var serviceModule = angular.module('componitor.service', [])
 
               // Replace with the populated template and $compile
               realElem.html(template.html());
-              $compile(realElem.contents())(s);
+              $compile(realElem.contents())(scope);
             }
           };
         }]);

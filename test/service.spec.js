@@ -74,13 +74,20 @@ describe('Componitor service', function () {
             '<div class="progress-bar" style="width: {{values.barValue}}%"></div>' +
           '</componitor-template>'
       );
-    });
-
-    it('should pass the arguments to the scope bound to \'values\'', function() {
       $scope.theValue = 57;
       elem = $compile('<progress-bar values="{barValue: theValue}"></progress-bar>')($scope);
       $scope.$digest();
+    });
+
+    it('should pass the arguments to the scope bound to \'values\'', function() {
       expect(elem.children(0).css('width')).toEqual('57%');
+    });
+
+    it('should change the values in the child scope, when parent scope changes', function() {
+      expect(elem.children(0).css('width')).toEqual('57%');
+      $scope.theValue = 20;
+      $scope.$digest();
+      expect(elem.children(0).css('width')).toEqual('20%');
     });
   });
 });
