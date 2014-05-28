@@ -66,28 +66,42 @@ describe('Componitor service', function () {
     });
   });
 
-  ddescribe('with variables as arguments to templates', function() {
+  ddescribe('with isolate="true" on the template', function() {
 
     beforeEach(function() {
       Componitor.process(
-          '<componitor-template name="progressBar">' +
-            '<div class="progress-bar" style="width: {{values.barValue}}%"></div>' +
+          '<componitor-template name="progress" isolate="true">' +
+            '<progress-bar values="{type:\'success\', value: values.success}"></progress-bar>' +
+            '<progress-bar values="{type:\'warning\', value: values.warning}"></progress-bar>' +
+          '</componitor-template>' +
+          '<componitor-template name="progressBar" isolate="true">' +
+            '<div class="progress-bar progress-bar-{{values.type}}" style="width: {{values.value}}%"></div>' +
           '</componitor-template>'
       );
-      $scope.theValue = 57;
-      elem = $compile('<progress-bar values="{barValue: theValue}"></progress-bar>')($scope);
+      $scope.progress = {
+        success: 40,
+        warning: 20
+      };
+      elem = $compile('<progress values="progress"></progress-bar>')($scope);
       $scope.$digest();
     });
 
-    it('should pass the arguments to the scope bound to \'values\'', function() {
-      expect(elem.children(0).css('width')).toEqual('57%');
+    function expectWidths(success, warning) {
+      expect(angular.element(elem[0].querySelector('.progress-bar-success')).css('width')).toEqual(success);
+      expect(angular.element(elem[0].querySelector('.progress-bar-warning')).css('width')).toEqual(warning);
+    }
+
+    it('should make the scope isolated and add two-way binding to \'values\'', function() {
+      expectWidths('40%', '20%');
     });
 
-    it('should change the values in the child scope, when parent scope changes', function() {
-      expect(elem.children(0).css('width')).toEqual('57%');
-      $scope.theValue = 20;
+    it('should change the values in the children\'s scopes', function() {
+      $scope.progress = {
+        success: 10,
+        warning: 15
+      };
       $scope.$digest();
-      expect(elem.children(0).css('width')).toEqual('20%');
+      expectWidths('10%', '15%');
     });
   });
 });

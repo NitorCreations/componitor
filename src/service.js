@@ -78,6 +78,7 @@ var serviceModule = angular.module('componitor.service', [])
        * @methodOf componitor.service.Componitor
        * @name componitor.service.Componitor#_createDirective
        * @param {string} name the camelCased angularjs-style representation of the directive-to-be's name
+       * @param {boolean} isolate whether or not to create isolated scope for the template.
        * @param {text/html} templateHtml the contents of the `<componitor-template />` block
        * @protected
        * @function
@@ -89,39 +90,25 @@ var serviceModule = angular.module('componitor.service', [])
        * This method should be called before the html containing the usages of
        * the templates is `$compile`d.
        *
+       * If you add `isolate="true"` to the template, the template's scope will be isolated
+       * with the value of the attribute `values` made available to the scope.
+       *
        * @see {@link componitor.service.Componitor#process}
        *
        */
-      self._createDirective = function _createDirective(name, templateHtml) {
+      self._createDirective = function _createDirective(name, isolate, templateHtml) {
         if (self._directiveNames.indexOf(name) !== -1) {
           throw new Error('Duplicate template name: "'+name+'"');
         }
         self._directiveNames.push(name);
         serviceModule._addDirective(name, ['$compile', function ($compile) {
           return {
-            scope: true,
+            scope: isolate ? { values: '=' } : true,
             restrict: 'AE',
             terminal: true,
-            link: function (scope, realElem, attrs) {
+            link: function (scope, realElem) {
               realElem.addClass('componitor-component');
               realElem.addClass('componitor-component-' + name);
-
-              /**
-               * Tracks the values attribute and keeps the scope's
-               * values attribute up to date with the changes.
-               */
-              scope.$watch(function() {
-                if (!attrs.values) {
-                  return undefined;
-                }
-                var newVal = scope.$eval(attrs.values);
-                if (!angular.equals(newVal, scope.values)) {
-                  return newVal;
-                }
-                return angular.equals(newVal, scope.values) ? scope.values : newVal;
-              }, function(v) {
-                scope.values = v;
-              });
 
               var template = copyHtml(templateHtml);
               // Find the content elements to be replaced by their selectors
@@ -163,10 +150,11 @@ var serviceModule = angular.module('componitor.service', [])
         var templateElement = angular.element(t);
         templateElement.css({display: 'none'});
         var name = templateElement.attr('name');
+        var isolate = templateElement.attr('isolate');
         if (!name) {
           throw '<componitor-template /> name should be the camelCased name of the created directive';
         }
-        self._createDirective(name, templateElement.html());
+        self._createDirective(name, isolate === "true", templateElement.html());
       };
 
       /**
