@@ -3,8 +3,11 @@ describe('Componitor service', function () {
   beforeEach(module('componitor.service'));
 
   var Componitor;
-  beforeEach(inject(function (_Componitor_) {
+  var $compile, $scope, elem;
+  beforeEach(inject(function (_Componitor_, _$compile_, $rootScope) {
     Componitor = _Componitor_;
+    $compile = _$compile_;
+    $scope = $rootScope.$new();
   }));
 
   describe('.process', function () {
@@ -32,10 +35,7 @@ describe('Componitor service', function () {
   });
 
   describe('with pre-processed template', function () {
-    var $compile, $scope, elem;
-    beforeEach(inject(function(_$compile_, $rootScope) {
-      $compile = _$compile_;
-      $scope = $rootScope.$new();
+    beforeEach(inject(function() {
       Componitor.process(
           '<componitor-template name="myBox">' +
             '<h1><content selector="my-box-title" /></h1>' +
@@ -45,16 +45,17 @@ describe('Componitor service', function () {
     }));
 
     describe('simple case', function() {
-      it('should replace the <content/> tags', function() {
+      beforeEach(function() {
         $scope.name = 'World';
         elem = $compile(
             '<my-box>' +
-              '<my-box-title>Hello {{name}}!</my-box-title>' +
-              '<my-box-body>These are my greetings to you.</my-box-body>' +
+            '<my-box-title>Hello {{name}}!</my-box-title>' +
+            '<my-box-body>These are my greetings to you.</my-box-body>' +
             '</my-box>'
         )($scope);
         $scope.$digest();
-
+      });
+      it('should replace the <content/> tags', function() {
         expect(elem).toHaveOuterHtml(
           '<my-box class="ng-scope componitor-component componitor-component-myBox">' +
             '<h1 class="ng-scope ng-binding">Hello World!</h1>' +
@@ -63,7 +64,23 @@ describe('Componitor service', function () {
         );
       });
     });
+  });
 
+  ddescribe('with variables as arguments to templates', function() {
 
+    beforeEach(function() {
+      Componitor.process(
+          '<componitor-template name="progressBar">' +
+            '<div class="progress-bar" style="width: {{values.barValue}}%"></div>' +
+          '</componitor-template>'
+      );
+    });
+
+    it('should pass the arguments to the scope bound to \'values\'', function() {
+      $scope.theValue = 57;
+      elem = $compile('<progress-bar values="{barValue: theValue}"></progress-bar>')($scope);
+      $scope.$digest();
+      expect(elem.children(0).css('width')).toEqual('57%');
+    });
   });
 });

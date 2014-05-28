@@ -102,10 +102,16 @@ var serviceModule = angular.module('componitor.service', [])
             scope: true,
             restrict: 'AE',
             terminal: true,
-            link: function (s, realElem) {
+            link: function (s, realElem, attrs) {
               realElem.addClass('componitor-component');
               realElem.addClass('componitor-component-' + name);
 
+              attrs.$observe('values', function(v) {
+                s.values = s.$eval(v);
+                if (!s.$$phase && !s.$root.$$phase) {
+                  s.$apply();
+                }
+              });
 
               var template = copyHtml(templateHtml);
               // Find the content elements to be replaced by their selectors
