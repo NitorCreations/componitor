@@ -1,6 +1,6 @@
 {
   "name": "componitor",
-  "version": "0.2.0",
+  "version": "0.3.0-SNAPSHOT",
   "authors": [
     "Nitor Creations / Reko Jokelainen"
   ],
@@ -27,7 +27,10 @@
     "_layouts",
     "_site",
     "images",
-    "dist/docs"
+    "dist/docs",
+    "Gemfile",
+    "_config.yml",
+    "index.html"
   ],
   "devDependencies": {
     "angular": "~1.2.16",
